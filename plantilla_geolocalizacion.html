@@ -36,6 +36,7 @@
 
             console.log(lat)
             console.log(long)
+            console.logg(position.coords.accuracy0)
             //aquí suponemos que tenemos un <div id="mapa"> como en la plantilla
             //En openstreetmap el nivel de zoom máximo es 19
             var mapa = L.map('mapa').setView([position.coords.latitude, position.coords.longitude], 10)
