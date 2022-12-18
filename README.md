@@ -9,3 +9,6 @@ Date:   Sun Dec 18 21:09:43 2022 +0100
 
  plantilla_geolocalizacion.html | 1 +
  1 file changed, 1 insertion(+)
+
+
+ Se ha agregado alias con comando git config --global alias.ch chechout
