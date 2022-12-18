@@ -4,7 +4,7 @@ commitMessage=$(cat $1)
 #
 #([^-]*-[^-]*)-.*
 pattern="([A-z]{1,5}-[0-9]{1,})+"
-if [[ ! "$commitMessag" =~ $pattern  ]]; then
+if [[ ! "$commitMessage" =~ $pattern  ]]; then
 	echo "Please add an issue number to the commit message: $commitMessage"
-	exit 0
+	exit 1
 fi
