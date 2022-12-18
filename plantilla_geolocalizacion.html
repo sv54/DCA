@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejercicio de geolocalización</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+</head>
+<body>
+    <div>
+      Coords: (<span id="lat">-</span>,<span id="lon">-</span>)
+      Precision: <span id="precision">-</span> m <br>
+    </div>  
+    <div id="mapa" style="width:600px; height: 400px; background-color: yellow">
+    Aquí debería salir el mapa 
+    </div>
+    <script>
+        var lat;
+        var long;
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log(navigator.geolocation.getCurrentPosition(pos))
+            //Lo que pongáis aquí dentro se ejecutará cuando se cargue la página
+            console.log('La página se acaba de cargar')
+
+            
+        })
+        
+        function pos(position){
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            console.log(position)
+
+            console.log(lat)
+            console.log(long)
+            //aquí suponemos que tenemos un <div id="mapa"> como en la plantilla
+            //En openstreetmap el nivel de zoom máximo es 19
+            var mapa = L.map('mapa').setView([position.coords.latitude, position.coords.longitude], 10)
+            //para que salga pintado el mapa necesitamos los "tiles"
+            //esto ponerlo literal, no hace falta cambiar nada
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(mapa)
+            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mapa);
+
+            document.getElementById("lat").textContent=position.coords.latitude;
+            document.getElementById("lon").textContent=position.coords.longitude;
+            document.getElementById("precision").textContent=position.coords.accuracy;
+
+
+
+        }
+    </script>
+</body>
+</html>
